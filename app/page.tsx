@@ -1,16 +1,23 @@
-"use client";
+import React from "react";
 
-import { queryClient } from "@/ui/queries/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import Home from "@/ui/pages/home";
-import { Wrapper } from "@/ui/components/core/Wrapper";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getTasks } from "@/services/tasks";
+import { HomeClient } from "@/app/home-client";
 
-export default function Root() {
+export default async function HomeServer() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["tasks", ""],
+    queryFn: () => getTasks(),
+  });
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Wrapper>
-        <Home />
-      </Wrapper>
-    </QueryClientProvider>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <HomeClient />
+    </HydrationBoundary>
   );
 }

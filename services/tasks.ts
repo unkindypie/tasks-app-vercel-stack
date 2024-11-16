@@ -17,6 +17,7 @@ const tasks = [
     completed: false,
   },
 ];
+
 export async function getTasks(search?: string) {
   console.log("Getting tasks...");
   if (search) return tasks.filter((task) => task.title.includes(search));

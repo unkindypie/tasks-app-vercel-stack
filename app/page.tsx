@@ -6,9 +6,9 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { getTasks } from "@/services/tasks";
-import { HomeClient } from "@/app/home-client";
+import { HomePageClient } from "@/app/home-page-client";
 
-export default async function HomeServer() {
+export default async function HomePageServer() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["tasks", ""],
@@ -17,7 +17,7 @@ export default async function HomeServer() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <HomeClient />
+      <HomePageClient />
     </HydrationBoundary>
   );
 }

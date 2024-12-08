@@ -1,7 +1,7 @@
-import type { NextRequest } from "next/server";
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  console.log("middleware", request.url);
+  console.log('middleware', request.url);
 }
 
 export const config = {
@@ -14,27 +14,27 @@ export const config = {
      */
     {
       source:
-        "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+        '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
       missing: [
-        { type: "header", key: "next-router-prefetch" },
-        { type: "header", key: "purpose", value: "prefetch" },
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
       ],
     },
 
     {
       source:
-        "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+        '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
       has: [
-        { type: "header", key: "next-router-prefetch" },
-        { type: "header", key: "purpose", value: "prefetch" },
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
       ],
     },
 
     {
       source:
-        "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-      has: [{ type: "header", key: "x-present" }],
-      missing: [{ type: "header", key: "x-missing", value: "prefetch" }],
+        '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+      has: [{ type: 'header', key: 'x-present' }],
+      missing: [{ type: 'header', key: 'x-missing', value: 'prefetch' }],
     },
   ],
 };

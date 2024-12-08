@@ -1,23 +1,22 @@
-"use client";
+'use client';
 
-import { useFormik, FormikProvider } from "formik";
-import * as yup from "yup";
-
-import { Wrapper } from "@/ui/components/core/Wrapper";
-import { InputField } from "@/ui/components/core/InputField";
-import { Card } from "@/ui/components/core/Card";
-import { Button } from "@/ui/components/core/Button";
-import { TaskStatusEnum } from "@/schema/models";
-import { SelectField } from "@/ui/components/core/SelectField";
-import { useProjectsQuery } from "@/ui/queries/projects";
-import { CreateTaskRequest } from "@/services/tasks";
-import { useCreateTaskMutation } from "@/ui/queries/tasks";
-import { useRouter } from "next/navigation";
+import { TaskStatusEnum } from '@/schema/models';
+import { CreateTaskRequest } from '@/services/tasks';
+import { Button } from '@/ui/components/core/Button';
+import { Card } from '@/ui/components/core/Card';
+import { InputField } from '@/ui/components/core/InputField';
+import { SelectField } from '@/ui/components/core/SelectField';
+import { Wrapper } from '@/ui/components/core/Wrapper';
+import { useProjectsQuery } from '@/ui/queries/projects';
+import { useCreateTaskMutation } from '@/ui/queries/tasks';
+import { FormikProvider, useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
+import * as yup from 'yup';
 
 const schema = yup.object().shape({
   text: yup.string().required(),
   status: yup.string().oneOf(TaskStatusEnum.enumValues).required(),
-  projectId: yup.number().required("Please select a project"),
+  projectId: yup.number().required('Please select a project'),
 });
 
 export default function CreateTaskPage() {
@@ -25,12 +24,12 @@ export default function CreateTaskPage() {
   const router = useRouter();
   const formik = useFormik<CreateTaskRequest>({
     initialValues: {
-      text: "",
+      text: '',
     } as CreateTaskRequest,
     validationSchema: schema,
     onSubmit: async (values) => {
       await mutateAsync(values);
-      router.replace("/");
+      router.replace('/');
     },
   });
   const { data: projects, isLoading } = useProjectsQuery();

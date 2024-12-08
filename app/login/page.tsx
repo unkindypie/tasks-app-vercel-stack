@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Wrapper } from "@/ui/components/core/Wrapper";
+import { Wrapper } from '@/ui/components/core/Wrapper';
 
 export default function Login() {
   return (

@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import { db } from "@/schema/db";
-import { Project, Task, TaskStatusEnumType } from "@/schema/models";
-import { eq, ilike } from "drizzle-orm";
-import { revalidateTag } from "next/cache";
+import { db } from '@/schema/db';
+import { Project, Task, TaskStatusEnumType } from '@/schema/models';
+import { eq, ilike } from 'drizzle-orm';
+import { revalidateTag } from 'next/cache';
 
 export interface CreateTaskRequest {
   text: string;
@@ -36,14 +36,14 @@ export async function createTask({
   status,
   projectId,
 }: CreateTaskRequest) {
-  console.log("Creating task", text, status, projectId);
+  console.log('Creating task', text, status, projectId);
   await db.insert(Task).values({ text, projectId, status }).execute();
 
-  revalidateTag("/");
+  revalidateTag('/');
 }
 
 export async function deleteTask(id: number) {
   await db.delete(Task).where(eq(Task.id, id));
 
-  revalidateTag("/");
+  revalidateTag('/');
 }

@@ -1,13 +1,13 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
-import { Wrapper } from "@/ui/components/core/Wrapper";
-import { Link } from "@/ui/components/core/Link";
-import { useDeleteTaskMutation, useTasksQuery } from "@/ui/queries/tasks";
-import { ArrowPathIcon } from "@heroicons/react/20/solid";
+import { Link } from '@/ui/components/core/Link';
+import { Wrapper } from '@/ui/components/core/Wrapper';
+import { useDeleteTaskMutation, useTasksQuery } from '@/ui/queries/tasks';
+import { ArrowPathIcon } from '@heroicons/react/20/solid';
 
 export function HomePageClient() {
-  const [search, setSearch] = React.useState("");
+  const [search, setSearch] = React.useState('');
   const { data, isLoading } = useTasksQuery(search);
   const { mutateAsync, isPending, variables } = useDeleteTaskMutation();
 
@@ -38,7 +38,7 @@ export function HomePageClient() {
                 <p>{task.status}</p>
                 <p>
                   {task.createdAt.toLocaleDateString()}
-                  {", "}
+                  {', '}
                   {task.createdAt.toLocaleTimeString()}
                 </p>
                 <p>{task.projectName}</p>

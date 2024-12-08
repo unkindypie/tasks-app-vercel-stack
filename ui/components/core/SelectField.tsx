@@ -1,7 +1,7 @@
-import { Description, Field, Label, Select } from "@headlessui/react";
-import { ChevronDownIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
-import { useField, useFormikContext } from "formik";
-import clsx from "clsx";
+import { Description, Field, Label, Select } from '@headlessui/react';
+import { ArrowPathIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
+import clsx from 'clsx';
+import { useField, useFormikContext } from 'formik';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -25,7 +25,7 @@ export function SelectField({ options, isLoading, ...props }: InputProps) {
       <Field>
         {props.label && (
           <Label className="my-2 flex flex-row items-center">
-            {props.label}{" "}
+            {props.label}{' '}
             {isLoading && (
               <ArrowPathIcon className="animate-spin size-4 ml-2" />
             )}
@@ -39,8 +39,8 @@ export function SelectField({ options, isLoading, ...props }: InputProps) {
         <div className="relative">
           <Select
             className={clsx(
-              "h-8 p-4 rounded-md w-full text-black py-1.5",
-              !field.value && "text-gray-500",
+              'h-8 p-4 rounded-md w-full text-black py-1.5',
+              !field.value && 'text-gray-500',
             )}
             {...field}
             disabled={isLoading}

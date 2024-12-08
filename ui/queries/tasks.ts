@@ -1,14 +1,10 @@
-import { createTask, deleteTask, getTasks } from "@/services/tasks";
-import {
-  useMutation,
-  useQuery,
-  // useQueryClient
-} from "@tanstack/react-query";
+import { createTask, deleteTask, getTasks } from '@/services/tasks';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useTasksQuery = (search?: string) => {
   const data = useQuery({
     queryFn: () => getTasks(search),
-    queryKey: ["tasks", search],
+    queryKey: ['tasks', search],
   });
   return data;
 };

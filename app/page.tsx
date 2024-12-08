@@ -1,17 +1,15 @@
-import React from "react";
-
+import { HomePageClient } from '@/app/home-page-client';
+import { getTasks } from '@/services/tasks';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
-} from "@tanstack/react-query";
-import { getTasks } from "@/services/tasks";
-import { HomePageClient } from "@/app/home-page-client";
+} from '@tanstack/react-query';
 
 export default async function HomePageServer() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["tasks", ""],
+    queryKey: ['tasks', ''],
     queryFn: () => getTasks(),
   });
 

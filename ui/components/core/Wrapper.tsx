@@ -1,6 +1,6 @@
-import { Link } from "@/ui/components/core/Link";
-import NextLink from "next/link";
-import React from "react";
+import { Link } from '@/ui/components/core/Link';
+import NextLink from 'next/link';
+import React from 'react';
 
 export interface WrapperProps {
   children: React.ReactNode;

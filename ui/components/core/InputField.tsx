@@ -1,5 +1,5 @@
-import { useField, useFormikContext } from "formik";
-import React from "react";
+import { useField, useFormikContext } from 'formik';
+import React from 'react';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -17,7 +17,7 @@ export const InputField = (props: InputProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     field.onChange(e);
-    setError("");
+    setError('');
   };
 
   return (
@@ -31,7 +31,7 @@ export const InputField = (props: InputProps) => {
         {...props}
         id={field.name}
         {...field}
-        value={field.value ?? props.value ?? ""}
+        value={field.value ?? props.value ?? ''}
         onChange={props.onChange || handleChange}
         className="h-8 p-4 rounded-md text-black placeholder-gray-500"
       />

@@ -4,14 +4,13 @@ services:
     container_name: tasks-postgres-db
     image: postgres:16-alpine
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
-      - "POSTGRES_USER=tasks"
-      - "POSTGRES_PASSWORD=tasks"
-      - "POSTGRES_DB=tasks"
+      - 'POSTGRES_USER=tasks'
+      - 'POSTGRES_PASSWORD=tasks'
+      - 'POSTGRES_DB=tasks'
     volumes:
       - ./var/postgres:/home/postgres/pgdata/data/
 
 volumes:
   postgres_data:
-

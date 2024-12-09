@@ -1,7 +1,7 @@
 'use client';
 
 import { TaskStatusEnum } from '@/schema/models';
-import { CreateTaskRequest } from '@/services/tasks';
+import { CreateTaskRequest } from '@/server-actions/tasks';
 import { Button } from '@/ui/components/core/Button';
 import { Card } from '@/ui/components/core/Card';
 import { InputField } from '@/ui/components/core/InputField';
@@ -38,7 +38,7 @@ export default function CreateTaskPage() {
     <Wrapper showBack className="mt-6">
       <FormikProvider value={formik}>
         <div className="flex justify-center items-center mb-2">
-          <h1 className="text-lg font-bold">Create your task</h1>
+          <h1 className="text-xl">Create your task</h1>
         </div>
         <Card>
           <InputField

@@ -1,40 +1,36 @@
-import type { NextRequest } from 'next/server';
+import { clientConfig, serverConfig } from '@/config';
+import { authMiddleware, redirectToLogin } from 'next-firebase-auth-edge';
+import { NextResponse, type NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  console.log('middleware', request.url);
+export const PUBLIC_PATHS = ['/login', '/sign-up'];
+
+export async function middleware(request: NextRequest) {
+  return authMiddleware(request, {
+    loginPath: '/api/login',
+    logoutPath: '/api/logout',
+    apiKey: clientConfig.apiKey!,
+    cookieName: serverConfig.cookieName,
+    cookieSignatureKeys: serverConfig.cookieSignatureKeys,
+    cookieSerializeOptions: serverConfig.cookieSerializeOptions,
+    serviceAccount: serverConfig.serviceAccount,
+    handleValidToken: async ({}, headers) => {
+      console.log('Token is valid');
+      return NextResponse.next({
+        request: {
+          headers,
+        },
+      });
+    },
+    handleInvalidToken: async () => {
+      console.log('Token is invalid, logging out');
+      return redirectToLogin(request, {
+        path: '/login',
+        publicPaths: PUBLIC_PATHS,
+      });
+    },
+  });
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-     */
-    {
-      source:
-        '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-      missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
-      ],
-    },
-
-    {
-      source:
-        '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-      has: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
-      ],
-    },
-
-    {
-      source:
-        '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-      has: [{ type: 'header', key: 'x-present' }],
-      missing: [{ type: 'header', key: 'x-missing', value: 'prefetch' }],
-    },
-  ],
+  matcher: ['/', '/((?!_next|api|.*\\.).*)', '/api/login', '/api/logout'],
 };

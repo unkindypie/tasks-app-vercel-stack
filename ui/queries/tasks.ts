@@ -1,4 +1,4 @@
-import { createTask, deleteTask, getTasks } from '@/services/tasks';
+import { createTask, deleteTask, getTasks } from '@/server-actions/tasks';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useTasksQuery = (search?: string) => {

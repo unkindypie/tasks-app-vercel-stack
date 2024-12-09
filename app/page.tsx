@@ -1,5 +1,5 @@
-import { HomePageClient } from '@/app/home-page-client';
-import { getTasks } from '@/services/tasks';
+import { HomePageClient } from '@/app/page-client';
+import { getTasks } from '@/server-actions/tasks';
 import {
   dehydrate,
   HydrationBoundary,
